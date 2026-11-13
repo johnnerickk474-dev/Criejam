@@ -6,6 +6,7 @@ import { MapaConflitos } from './pages/MapaConflitos';
 import { AlertasPreventivos } from './pages/AlertasPreventivos';
 import { AlertaDetalhe } from './pages/AlertaDetalhe';
 import { LaboratorioCausas } from './pages/LaboratorioCausas';
+import { Notificacoes } from './pages/Notificacoes';
 
 function PaginaNaoEncontrada() {
   return (
@@ -38,6 +39,7 @@ export function App() {
           <Route path="/alertas/:id" element={<AlertaDetalhe />} />
           <Route path="/laboratorio" element={<LaboratorioCausas />} />
           <Route path="/laboratorio/:alertaId" element={<LaboratorioCausas />} />
+          <Route path="/notificacoes" element={<Notificacoes />} />
           <Route path="*" element={<PaginaNaoEncontrada />} />
         </Route>
       </Routes>

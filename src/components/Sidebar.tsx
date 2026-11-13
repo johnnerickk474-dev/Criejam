@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   AlertTriangle,
+  Bell,
   FlaskConical,
   LayoutDashboard,
   Map,
@@ -50,6 +51,16 @@ const GRUPOS_NAVEGACAO: GrupoNavegacao[] = [
         rotulo: 'Laboratório de Causas',
         caminho: '/laboratorio',
         icone: FlaskConical,
+      },
+    ],
+  },
+  {
+    titulo: 'CONFIGURAÇÕES',
+    itens: [
+      {
+        rotulo: 'Notificações',
+        caminho: '/notificacoes',
+        icone: Bell,
       },
     ],
   },
