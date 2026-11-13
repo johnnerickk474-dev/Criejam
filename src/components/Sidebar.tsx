@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import {
   AlertTriangle,
   Bell,
-  FlaskConical,
   LayoutDashboard,
   Map,
   X,
@@ -41,16 +40,6 @@ const GRUPOS_NAVEGACAO: GrupoNavegacao[] = [
         rotulo: 'Alertas Preventivos',
         caminho: '/alertas',
         icone: AlertTriangle,
-      },
-    ],
-  },
-  {
-    titulo: 'INVESTIGAR',
-    itens: [
-      {
-        rotulo: 'Laboratório de Causas',
-        caminho: '/laboratorio',
-        icone: FlaskConical,
       },
     ],
   },
