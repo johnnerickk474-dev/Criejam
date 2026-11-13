@@ -3,12 +3,18 @@ import type { FormEvent } from 'react';
 import { BellRing, CheckCircle } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 
+const CHAVE_STORAGE_EMAIL = 'radar_email_notificacao';
+
 export function Notificacoes() {
   const [email, setEmail] = useState('');
-  const [emailAtivo, setEmailAtivo] = useState<string | null>(null);
+  const [emailAtivo, setEmailAtivo] = useState<string | null>(() =>
+    localStorage.getItem(CHAVE_STORAGE_EMAIL),
+  );
   const [enviando, setEnviando] = useState(false);
   const [cancelando, setCancelando] = useState(false);
-  const [cadastrado, setCadastrado] = useState(false);
+  const [cadastrado, setCadastrado] = useState<boolean>(() =>
+    Boolean(localStorage.getItem(CHAVE_STORAGE_EMAIL)),
+  );
   const temporizadorRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -26,6 +32,7 @@ export function Notificacoes() {
 
     setEnviando(true);
     temporizadorRef.current = window.setTimeout(() => {
+      localStorage.setItem(CHAVE_STORAGE_EMAIL, emailSubmetido);
       setEmailAtivo(emailSubmetido);
       setEnviando(false);
       setCadastrado(true);
@@ -38,6 +45,7 @@ export function Notificacoes() {
 
     setCancelando(true);
     temporizadorRef.current = window.setTimeout(() => {
+      localStorage.removeItem(CHAVE_STORAGE_EMAIL);
       setCancelando(false);
       setEmailAtivo(null);
       setCadastrado(false);
