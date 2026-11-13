@@ -81,6 +81,9 @@ function construirAlertasCalculados(): AlertaCalculado[] {
   const focosPorId = new Map<string, Foco>(
     FOCOS.map((foco) => [foco.id, foco]),
   );
+  const definicoesPorFocoId = new Map(
+    DEFINICOES_ALERTAS.map((definicao) => [definicao.focoId, definicao]),
+  );
 
   const lista: AlertaCalculado[] = [];
 
@@ -97,7 +100,7 @@ function construirAlertasCalculados(): AlertaCalculado[] {
     lista.push({
       id: definicao.id,
       focoId: foco.id,
-      assunto: foco.assunto,
+      assunto: foco.tema ?? foco.assunto,
       categoria: foco.categoria,
       parteRe: foco.parteRe,
       setorParteRe: foco.setorParteRe,
@@ -109,6 +112,33 @@ function construirAlertasCalculados(): AlertaCalculado[] {
       geradoEm: definicao.geradoEm,
       hipoteses: definicao.hipoteses,
       oportunidade: definicao.oportunidade,
+      variacaoPercentual: resultado.variacaoPercentual,
+      nivel: resultado.nivel,
+    });
+  }
+
+  for (const foco of FOCOS) {
+    if (definicoesPorFocoId.has(foco.id)) continue;
+
+    const periodoAnterior = foco.serieMensal[INDICE_ANTERIOR] ?? 0;
+    const periodoAtual = foco.serieMensal[INDICE_ATUAL] ?? 0;
+    const resultado = calcularVariacao(periodoAnterior, periodoAtual);
+
+    if (resultado.nivel === 'sem-alerta') continue;
+
+    lista.push({
+      id: foco.id,
+      focoId: foco.id,
+      assunto: foco.tema ?? foco.assunto,
+      categoria: foco.categoria,
+      parteRe: foco.parteRe,
+      setorParteRe: foco.setorParteRe,
+      municipio: foco.municipio,
+      periodoAnterior,
+      periodoAtual,
+      serieMensal: [...foco.serieMensal],
+      situacao: 'Novo',
+      geradoEm: '2026-11-06',
       variacaoPercentual: resultado.variacaoPercentual,
       nivel: resultado.nivel,
     });
@@ -320,14 +350,11 @@ export async function getLitigantes(): Promise<Litigante[]> {
 
 export async function getAssuntosEmAscensao(): Promise<ResumoCategoria[]> {
   return agregarAssuntos(FOCOS)
-    .filter((item) => item.nivel === 'prioritario' || item.nivel === 'atencao')
+    .filter((item) => item.casosAtual > item.casosAnterior)
     .sort((a, b) => {
-      const diffNivel = PRIORIDADE_NIVEL[b.nivel] - PRIORIDADE_NIVEL[a.nivel];
-      if (diffNivel !== 0) return diffNivel;
-
-      const varA = a.variacaoPercentual ?? -Infinity;
-      const varB = b.variacaoPercentual ?? -Infinity;
-      if (varB !== varA) return varB - varA;
+      const novosA = a.casosAtual - a.casosAnterior;
+      const novosB = b.casosAtual - b.casosAnterior;
+      if (novosB !== novosA) return novosB - novosA;
 
       return b.casosAtual - a.casosAtual;
     });

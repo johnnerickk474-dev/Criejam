@@ -23,6 +23,7 @@ export type SituacaoAlerta =
 export interface Foco {
   id: string;
   assunto: string;
+  tema?: string;
   categoria: CategoriaAssunto;
   parteRe: string;
   setorParteRe: string;
