@@ -1,0 +1,46 @@
+:root {
+  /* Tipografia do sistema (zero dependências externas) */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+
+  /* Identidade e navegação */
+  --color-navy: #142D4E;
+  --color-navy-light: #1E3F6B;
+
+  /* Ação principal (Teal com contraste AA > 5.4:1 sobre branco) */
+  --color-accent: #0F766E;
+  --color-accent-hover: #115E59;
+  --color-accent-light: #CCFBF1;
+  --color-accent-on-dark: #2DD4BF;
+
+  /* Superfícies e bordas */
+  --color-bg-page: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-subtle: #F1F5F9;
+  --color-border-subtle: #E2E8F0;
+
+  /* Textos (contraste AA garantido) */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+
+  /* Níveis de alerta (contraste AA para texto sobre fundo do badge) */
+  --color-alerta-prioritario-text: #B91C1C;
+  --color-alerta-prioritario-bg: #FEF2F2;
+  --color-alerta-prioritario-border: #FECACA;
+
+  --color-alerta-atencao-text: #B45309;
+  --color-alerta-atencao-bg: #FFFBEB;
+  --color-alerta-atencao-border: #FDE68A;
+
+  --color-alerta-monitoramento-text: #1D4ED8;
+  --color-alerta-monitoramento-bg: #EFF6FF;
+  --color-alerta-monitoramento-border: #BFDBFE;
+
+  --color-alerta-sem-base-text: #374151;
+  --color-alerta-sem-base-bg: #F3F4F6;
+  --color-alerta-sem-base-border: #D1D5DB;
+
+  /* Raios de borda */
+  --radius-card: 0.5rem;
+}
