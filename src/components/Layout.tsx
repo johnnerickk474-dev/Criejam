@@ -19,7 +19,7 @@ export function Layout() {
       <Sidebar aberto={menuAberto} aoFechar={() => setMenuAberto(false)} />
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-30">
+        <header className="sticky top-0 z-30 shadow-sm">
           <BannerDemo />
 
           <div className="lg:hidden flex items-center justify-between bg-navy text-white px-4 py-3 border-b border-white/10">
@@ -48,7 +48,7 @@ export function Layout() {
           <Outlet />
         </main>
 
-        <footer className="border-t border-border-subtle bg-surface-card px-6 py-4 text-xs text-text-secondary">
+        <footer className="relative z-10 border-t border-border-subtle bg-surface-card px-6 py-4 text-xs text-text-secondary">
           <div className="max-w-7xl mx-auto">
             RADAR DE CONFLITOS PE · Inteligência para agir antes do processo.
             Protótipo demonstrativo com dados sintéticos para a CRIEJAM 2026.

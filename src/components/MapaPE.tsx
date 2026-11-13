@@ -255,7 +255,7 @@ export function MapaPE({
                   aoSelecionarMunicipio?.(item.municipio);
                 }
               }}
-              className="cursor-pointer outline-none"
+              className="mapa-municipio-interativo cursor-pointer"
             >
               <path
                 d={geom.d}
@@ -265,6 +265,16 @@ export function MapaPE({
                 strokeDasharray={semUnidadeComAlerta ? '3 2' : undefined}
                 opacity={estaDestacado ? 1 : 0.92}
               />
+
+              {municipioAtivo === item.municipio && (
+                <path
+                  d={geom.d}
+                  fill="none"
+                  stroke="#0F766E"
+                  strokeWidth={3}
+                  pointerEvents="none"
+                />
+              )}
 
               {/* Marcador visual fixo para municípios com unidade física CEJUSC */}
               {item.temUnidade && (

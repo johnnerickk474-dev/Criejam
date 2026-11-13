@@ -25,6 +25,16 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
+
+  .mapa-municipio-interativo:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .mapa-municipio-interativo:focus-visible path {
+    stroke: var(--color-navy);
+    stroke-width: 2.8;
+  }
 }
 
 @layer components {

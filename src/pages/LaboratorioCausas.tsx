@@ -184,7 +184,7 @@ export function LaboratorioCausas() {
             </p>
           </div>
 
-          <div className="lg:col-span-2 h-[170px] w-full">
+          <div className="lg:col-span-2 h-64 min-h-[16rem] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={dadosSerie}

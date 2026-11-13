@@ -111,7 +111,7 @@ export function VisaoGeral() {
                   out/2026)
                 </p>
               </div>
-              <div className="h-[300px] w-full">
+              <div className="h-72 min-h-[16rem] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={dashboard.evolucaoMensal}
@@ -167,7 +167,7 @@ export function VisaoGeral() {
                   assunto
                 </p>
               </div>
-              <div className="h-[300px] w-full">
+              <div className="h-72 min-h-[16rem] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={dashboard.porCategoria}
@@ -234,7 +234,7 @@ export function VisaoGeral() {
               </p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+                <table className="w-full min-w-[640px] text-left border-collapse">
                   <caption className="sr-only">
                     Lista de partes rés fictícias em nível Atenção ou
                     Prioritário no período atual

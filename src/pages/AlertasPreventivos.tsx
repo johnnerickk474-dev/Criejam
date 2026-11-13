@@ -156,7 +156,7 @@ export function AlertasPreventivos() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full min-w-[720px] text-left border-collapse">
               <caption className="sr-only">
                 Lista de alertas preventivos calculados por assunto, parte ré e
                 município
