@@ -9,6 +9,7 @@ import {
 import {
   getAlerta,
   getAlertas,
+  getAssuntosEmAscensao,
   getDashboard,
   getLitigantes,
   getMunicipios,
@@ -182,5 +183,13 @@ describe('dados fictícios e dataService', () => {
     const beloJardim = mapa.find((m) => m.municipio === 'Belo Jardim');
     expect(beloJardim?.temUnidade).toBe(false);
     expect(beloJardim?.alertasVinculados).toContain('AL-2026-005');
+
+    const assuntosEmAscensao = await getAssuntosEmAscensao();
+    expect(assuntosEmAscensao.map((a) => a.categoria)).toEqual([
+      'Direito do Consumidor',
+      'Direito da Saúde',
+    ]);
+    expect(assuntosEmAscensao[0].nivel).toBe('prioritario');
+    expect(assuntosEmAscensao[1].nivel).toBe('atencao');
   });
 });

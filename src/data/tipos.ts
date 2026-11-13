@@ -1,10 +1,10 @@
 export type CategoriaAssunto =
-  | 'Consumo e serviços'
-  | 'Saúde'
-  | 'Execução fiscal'
-  | 'Família'
-  | 'Educação e inclusão'
-  | 'Contratos'
+  | 'Direito do Consumidor'
+  | 'Direito da Saúde'
+  | 'Direito Tributário'
+  | 'Direito de Família'
+  | 'Direito à Educação'
+  | 'Direito Civil'
   | 'Outros';
 
 export type NivelAlerta =

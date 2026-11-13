@@ -162,6 +162,31 @@ function agregarLitigantes(focos: readonly Foco[]): Litigante[] {
   return litigantes.sort((a, b) => b.casosAtual - a.casosAtual);
 }
 
+function agregarAssuntos(focos: readonly Foco[]): ResumoCategoria[] {
+  const mapaCategorias = new Map<
+    CategoriaAssunto,
+    { atual: number; anterior: number }
+  >();
+
+  for (const foco of focos) {
+    const atual = foco.serieMensal[INDICE_ATUAL] ?? 0;
+    const anterior = foco.serieMensal[INDICE_ANTERIOR] ?? 0;
+    const cat = mapaCategorias.get(foco.categoria) ?? { atual: 0, anterior: 0 };
+    cat.atual += atual;
+    cat.anterior += anterior;
+    mapaCategorias.set(foco.categoria, cat);
+  }
+
+  return Array.from(mapaCategorias.entries())
+    .map(([categoria, valores]) => ({
+      categoria,
+      casosAtual: valores.atual,
+      casosAnterior: valores.anterior,
+      ...calcularVariacao(valores.anterior, valores.atual),
+    }))
+    .sort((a, b) => b.casosAtual - a.casosAtual);
+}
+
 export async function getAlertas(
   filtros?: FiltrosAlertas,
 ): Promise<AlertaCalculado[]> {
@@ -212,10 +237,6 @@ export async function getDashboard(
   let totalCasosPeriodoAnterior = 0;
 
   const totaisMensais = new Array<number>(INDICE_ATUAL + 1).fill(0);
-  const mapaCategorias = new Map<
-    CategoriaAssunto,
-    { atual: number; anterior: number }
-  >();
   const mapaMunicipios = new Map<
     string,
     { atual: number; anterior: number }
@@ -231,11 +252,6 @@ export async function getDashboard(
     for (let i = 0; i <= INDICE_ATUAL; i++) {
       totaisMensais[i] += foco.serieMensal[i] ?? 0;
     }
-
-    const cat = mapaCategorias.get(foco.categoria) ?? { atual: 0, anterior: 0 };
-    cat.atual += atual;
-    cat.anterior += anterior;
-    mapaCategorias.set(foco.categoria, cat);
 
     const mun = mapaMunicipios.get(foco.municipio) ?? { atual: 0, anterior: 0 };
     mun.atual += atual;
@@ -255,16 +271,7 @@ export async function getDashboard(
     }),
   );
 
-  const porCategoria: ResumoCategoria[] = Array.from(
-    mapaCategorias.entries(),
-  )
-    .map(([categoria, valores]) => ({
-      categoria,
-      casosAtual: valores.atual,
-      casosAnterior: valores.anterior,
-      ...calcularVariacao(valores.anterior, valores.atual),
-    }))
-    .sort((a, b) => b.casosAtual - a.casosAtual);
+  const porCategoria: ResumoCategoria[] = agregarAssuntos(focosFiltrados);
 
   const porMunicipio: ResumoMunicipioDashboard[] = Array.from(
     mapaMunicipios.entries(),
@@ -302,6 +309,21 @@ export async function getDashboard(
 
 export async function getLitigantes(): Promise<Litigante[]> {
   return agregarLitigantes(FOCOS);
+}
+
+export async function getAssuntosEmAscensao(): Promise<ResumoCategoria[]> {
+  return agregarAssuntos(FOCOS)
+    .filter((item) => item.nivel === 'prioritario' || item.nivel === 'atencao')
+    .sort((a, b) => {
+      const diffNivel = PRIORIDADE_NIVEL[b.nivel] - PRIORIDADE_NIVEL[a.nivel];
+      if (diffNivel !== 0) return diffNivel;
+
+      const varA = a.variacaoPercentual ?? -Infinity;
+      const varB = b.variacaoPercentual ?? -Infinity;
+      if (varB !== varA) return varB - varA;
+
+      return b.casosAtual - a.casosAtual;
+    });
 }
 
 export async function getMunicipios(): Promise<Municipio[]> {

@@ -12,12 +12,12 @@ import {
 } from '../services/dataService';
 
 const CATEGORIAS: readonly CategoriaAssunto[] = [
-  'Consumo e serviços',
-  'Saúde',
-  'Contratos',
-  'Educação e inclusão',
-  'Execução fiscal',
-  'Família',
+  'Direito do Consumidor',
+  'Direito da Saúde',
+  'Direito Civil',
+  'Direito Tributário',
+  'Direito de Família',
+  'Direito à Educação',
   'Outros',
 ];
 
@@ -103,7 +103,7 @@ export function MapaConflitos() {
             htmlFor="filtro-categoria-mapa"
             className="block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1.5"
           >
-            Filtrar por categoria de assunto
+            Assunto Jurídico
           </label>
           <select
             id="filtro-categoria-mapa"
@@ -116,7 +116,7 @@ export function MapaConflitos() {
             }}
             className="w-full rounded-md border border-border-subtle bg-surface-card px-3 py-2 text-sm text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <option value="">Todas as categorias</option>
+            <option value="">Todos os assuntos jurídicos</option>
             {CATEGORIAS.map((categoria) => (
               <option key={categoria} value={categoria}>
                 {categoria}
@@ -254,7 +254,7 @@ export function MapaConflitos() {
             </div>
           ) : municipiosEmDestaque.length === 0 ? (
             <p className="p-5 text-sm text-text-secondary">
-              Nenhum registro encontrado para esta categoria.
+              Nenhum registro encontrado para este assunto jurídico.
             </p>
           ) : (
             <ul className="divide-y divide-border-subtle">

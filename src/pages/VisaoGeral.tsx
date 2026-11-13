@@ -22,28 +22,36 @@ import { PageHeader } from '../components/PageHeader';
 import type { Litigante } from '../data/tipos';
 import { formatarVariacao } from '../lib/variacao';
 import {
+  getAssuntosEmAscensao,
   getDashboard,
   getLitigantes,
   type Dashboard,
+  type ResumoCategoria,
 } from '../services/dataService';
 
 export function VisaoGeral() {
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [litigantes, setLitigantes] = useState<Litigante[]>([]);
+  const [assuntosEmAscensao, setAssuntosEmAscensao] = useState<
+    ResumoCategoria[]
+  >([]);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     let ativo = true;
 
     async function carregar() {
-      const [dadosDashboard, dadosLitigantes] = await Promise.all([
-        getDashboard(),
-        getLitigantes(),
-      ]);
+      const [dadosDashboard, dadosLitigantes, dadosAssuntos] =
+        await Promise.all([
+          getDashboard(),
+          getLitigantes(),
+          getAssuntosEmAscensao(),
+        ]);
 
       if (!ativo) return;
       setDashboard(dadosDashboard);
       setLitigantes(dadosLitigantes);
+      setAssuntosEmAscensao(dadosAssuntos);
       setCarregando(false);
     }
 
@@ -160,11 +168,11 @@ export function VisaoGeral() {
             <article className="card-base p-6">
               <div className="mb-4">
                 <h2 className="text-lg font-bold text-navy">
-                  Distribuição por Categoria
+                  Distribuição por Assunto Jurídico
                 </h2>
                 <p className="text-xs text-text-secondary mt-1">
-                  Casos registrados no período atual (out/2026) por categoria de
-                  assunto
+                  Casos registrados no período atual (out/2026) por assunto
+                  jurídico
                 </p>
               </div>
               <div className="h-72 min-h-[16rem] w-full">
@@ -187,7 +195,7 @@ export function VisaoGeral() {
                     <YAxis
                       type="category"
                       dataKey="categoria"
-                      width={140}
+                      width={155}
                       tick={{ fill: '#0F172A', fontSize: 12 }}
                       tickLine={false}
                     />
@@ -284,6 +292,77 @@ export function VisaoGeral() {
                         </td>
                         <td className="px-6 py-3.5">
                           <BadgeNivel nivel={litigante.nivel} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </article>
+
+          <article className="card-base overflow-hidden">
+            <div className="px-6 py-4 border-b border-border-subtle">
+              <h2 className="text-lg font-bold text-navy">
+                Assuntos em Ascensão
+              </h2>
+              <p className="text-xs text-text-secondary mt-1">
+                Assuntos jurídicos classificados em nível Atenção ou Prioritário
+                em out/2026
+              </p>
+            </div>
+
+            {assuntosEmAscensao.length === 0 ? (
+              <p className="p-6 text-sm text-text-secondary">
+                Nenhum assunto jurídico em nível Atenção ou Prioritário no
+                período.
+              </p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[640px] text-left border-collapse">
+                  <caption className="sr-only">
+                    Lista de assuntos jurídicos em nível Atenção ou Prioritário
+                    no período atual
+                  </caption>
+                  <thead>
+                    <tr className="bg-surface-subtle border-b border-border-subtle text-xs font-semibold uppercase tracking-wider text-text-secondary">
+                      <th scope="col" className="px-6 py-3">
+                        Assunto Jurídico
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-right">
+                        Casos no Período
+                      </th>
+                      <th scope="col" className="px-6 py-3 text-right">
+                        Variação %
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Nível
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border-subtle text-sm">
+                    {assuntosEmAscensao.map((assunto) => (
+                      <tr
+                        key={assunto.categoria}
+                        className="hover:bg-surface-page/70 transition-colors"
+                      >
+                        <td className="px-6 py-3.5 font-semibold text-text-primary">
+                          {assunto.categoria}
+                        </td>
+                        <td className="px-6 py-3.5 text-right tabular-nums text-text-primary">
+                          <span className="font-semibold">
+                            {assunto.casosAtual.toLocaleString('pt-BR')}
+                          </span>
+                          <span className="block text-xs text-text-secondary">
+                            anterior:{' '}
+                            {assunto.casosAnterior.toLocaleString('pt-BR')}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3.5 text-right font-semibold tabular-nums text-navy">
+                          {formatarVariacao(assunto)}
+                        </td>
+                        <td className="px-6 py-3.5">
+                          <BadgeNivel nivel={assunto.nivel} />
                         </td>
                       </tr>
                     ))}

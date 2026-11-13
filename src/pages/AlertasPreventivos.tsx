@@ -3,9 +3,24 @@ import { Link } from 'react-router-dom';
 import { FlaskConical } from 'lucide-react';
 import { BadgeNivel } from '../components/BadgeNivel';
 import { PageHeader } from '../components/PageHeader';
-import type { AlertaCalculado, Municipio, NivelAlerta } from '../data/tipos';
+import type {
+  AlertaCalculado,
+  CategoriaAssunto,
+  Municipio,
+  NivelAlerta,
+} from '../data/tipos';
 import { formatarVariacao } from '../lib/variacao';
 import { getAlertas, getMunicipios } from '../services/dataService';
+
+const ASSUNTOS_JURIDICOS: readonly CategoriaAssunto[] = [
+  'Direito do Consumidor',
+  'Direito da Saúde',
+  'Direito Civil',
+  'Direito Tributário',
+  'Direito de Família',
+  'Direito à Educação',
+  'Outros',
+];
 
 export function AlertasPreventivos() {
   const [alertas, setAlertas] = useState<AlertaCalculado[]>([]);
@@ -13,6 +28,9 @@ export function AlertasPreventivos() {
   const [nivelSelecionado, setNivelSelecionado] = useState<NivelAlerta | ''>(
     '',
   );
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState<
+    CategoriaAssunto | ''
+  >('');
   const [municipioSelecionado, setMunicipioSelecionado] = useState<string>('');
   const [carregando, setCarregando] = useState(true);
 
@@ -42,6 +60,7 @@ export function AlertasPreventivos() {
       setCarregando(true);
       const resultado = await getAlertas({
         nivel: nivelSelecionado || undefined,
+        categoria: categoriaSelecionada || undefined,
         municipio: municipioSelecionado || undefined,
       });
 
@@ -55,7 +74,7 @@ export function AlertasPreventivos() {
     return () => {
       ativo = false;
     };
-  }, [nivelSelecionado, municipioSelecionado]);
+  }, [nivelSelecionado, categoriaSelecionada, municipioSelecionado]);
 
   return (
     <section aria-labelledby="titulo-pagina" className="space-y-6">
@@ -66,7 +85,7 @@ export function AlertasPreventivos() {
       />
 
       <div className="card-base p-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
           <div>
             <label
               htmlFor="filtro-nivel"
@@ -91,6 +110,32 @@ export function AlertasPreventivos() {
               <option value="sem-base">
                 Sem base comparável (nova ocorrência)
               </option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="filtro-assunto-juridico"
+              className="block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1.5"
+            >
+              Assunto Jurídico
+            </label>
+            <select
+              id="filtro-assunto-juridico"
+              value={categoriaSelecionada}
+              onChange={(evento) =>
+                setCategoriaSelecionada(
+                  evento.target.value as CategoriaAssunto | '',
+                )
+              }
+              className="w-full rounded-md border border-border-subtle bg-surface-card px-3 py-2 text-sm text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <option value="">Todos os assuntos jurídicos</option>
+              {ASSUNTOS_JURIDICOS.map((assunto) => (
+                <option key={assunto} value={assunto}>
+                  {assunto}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -129,11 +174,14 @@ export function AlertasPreventivos() {
                       : 'alertas encontrados'
                   }`}
             </p>
-            {(nivelSelecionado || municipioSelecionado) && (
+            {(nivelSelecionado ||
+              categoriaSelecionada ||
+              municipioSelecionado) && (
               <button
                 type="button"
                 onClick={() => {
                   setNivelSelecionado('');
+                  setCategoriaSelecionada('');
                   setMunicipioSelecionado('');
                 }}
                 className="text-xs font-semibold text-accent hover:text-accent-hover underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
