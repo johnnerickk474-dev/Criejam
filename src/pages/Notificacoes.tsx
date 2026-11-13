@@ -5,7 +5,9 @@ import { PageHeader } from '../components/PageHeader';
 
 export function Notificacoes() {
   const [email, setEmail] = useState('');
+  const [emailAtivo, setEmailAtivo] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
+  const [cancelando, setCancelando] = useState(false);
   const [cadastrado, setCadastrado] = useState(false);
   const temporizadorRef = useRef<number | null>(null);
 
@@ -19,19 +21,29 @@ export function Notificacoes() {
 
   function aoSubmeter(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    if (!email.trim() || enviando) return;
+    const emailSubmetido = email.trim();
+    if (!emailSubmetido || enviando) return;
 
     setEnviando(true);
     temporizadorRef.current = window.setTimeout(() => {
+      setEmailAtivo(emailSubmetido);
       setEnviando(false);
       setCadastrado(true);
       temporizadorRef.current = null;
     }, 500);
   }
 
-  function aoCadastrarOutro() {
-    setEmail('');
-    setCadastrado(false);
+  function aoCancelarInscricao() {
+    if (cancelando) return;
+
+    setCancelando(true);
+    temporizadorRef.current = window.setTimeout(() => {
+      setCancelando(false);
+      setEmailAtivo(null);
+      setCadastrado(false);
+      setEmail('');
+      temporizadorRef.current = null;
+    }, 400);
   }
 
   return (
@@ -66,7 +78,7 @@ export function Notificacoes() {
           </div>
         </div>
 
-        {cadastrado ? (
+        {cadastrado && emailAtivo ? (
           <div
             role="status"
             aria-live="polite"
@@ -78,22 +90,27 @@ export function Notificacoes() {
                 aria-hidden="true"
               />
               <div className="space-y-1">
-                <p className="text-sm font-semibold text-emerald-950">
-                  E-mail cadastrado com sucesso! Você passará a receber alertas
-                  de nível Prioritário.
+                <p className="text-sm font-medium text-emerald-950 leading-relaxed">
+                  Alertas Ativos. As notificações de nível Prioritário serão
+                  enviadas para o e-mail:{' '}
+                  <strong className="font-bold text-emerald-950">
+                    {emailAtivo}
+                  </strong>
                 </p>
                 <p className="text-xs text-emerald-900">
-                  Destinatário simulado: <span className="font-mono">{email}</span>
+                  Em conformidade com a LGPD (simulação), você pode revogar o
+                  recebimento a qualquer momento.
                 </p>
               </div>
             </div>
 
             <button
               type="button"
-              onClick={aoCadastrarOutro}
-              className="inline-flex items-center px-4 py-2 rounded-md border border-emerald-300 bg-white text-emerald-900 text-sm font-semibold hover:bg-emerald-100/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              disabled={cancelando}
+              onClick={aoCancelarInscricao}
+              className="inline-flex items-center px-4 py-2 rounded-md border border-red-300 bg-white text-red-700 text-sm font-semibold hover:bg-red-50 disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
             >
-              Cadastrar outro e-mail
+              {cancelando ? 'Cancelando...' : 'Cancelar Inscrição'}
             </button>
           </div>
         ) : (
