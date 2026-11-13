@@ -256,10 +256,10 @@ export function AlertasPreventivos() {
                     ID
                   </th>
                   <th scope="col" className="px-5 py-3">
-                    Objeto da Ação
+                    Assunto Jurídico
                   </th>
                   <th scope="col" className="px-5 py-3">
-                    Assunto Jurídico
+                    Objeto da Ação
                   </th>
                   <th scope="col" className="px-5 py-3">
                     Parte Ré
@@ -284,11 +284,11 @@ export function AlertasPreventivos() {
                     <td className="px-5 py-4 font-mono text-xs font-semibold text-navy whitespace-nowrap">
                       {alerta.id}
                     </td>
-                    <td className="px-5 py-4 font-semibold text-text-primary">
-                      {alerta.assunto}
-                    </td>
                     <td className="px-5 py-4 text-text-secondary whitespace-nowrap">
                       {alerta.categoria}
+                    </td>
+                    <td className="px-5 py-4 font-semibold text-text-primary">
+                      {alerta.assunto}
                     </td>
                     <td className="px-5 py-4">
                       <div className="font-medium text-text-primary">
