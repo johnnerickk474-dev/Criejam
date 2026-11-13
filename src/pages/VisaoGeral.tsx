@@ -228,7 +228,7 @@ export function VisaoGeral() {
           <article className="card-base overflow-hidden">
             <div className="px-6 py-4 border-b border-border-subtle">
               <h2 className="text-lg font-bold text-navy">
-                Assuntos em Ascensão
+                Assuntos em Monitoramento
               </h2>
               <p className="text-xs text-text-secondary mt-1">
                 Assuntos jurídicos classificados em nível Atenção ou Prioritário
@@ -299,7 +299,7 @@ export function VisaoGeral() {
           <article className="card-base overflow-hidden">
             <div className="px-6 py-4 border-b border-border-subtle">
               <h2 className="text-lg font-bold text-navy">
-                Litigantes em Ascensão
+                Litigantes em Monitoramento
               </h2>
               <p className="text-xs text-text-secondary mt-1">
                 Partes rés (empresas fictícias) classificadas em nível Atenção
