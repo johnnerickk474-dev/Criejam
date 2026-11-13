@@ -49,97 +49,97 @@ function poligonoMunicipio(
 
 const GEOMETRIA_MUNICIPIOS: Record<string, GeometriaMunicipio> = {
   // Sertão
-  Araripina: { cx: 88, cy: 112, d: poligonoMunicipio(88, 112, 30, 22, 3) },
-  Ouricuri: { cx: 145, cy: 145, d: poligonoMunicipio(145, 145, 28, 22, -2) },
-  Petrolina: { cx: 120, cy: 255, d: poligonoMunicipio(120, 255, 38, 28, 4) },
-  Salgueiro: { cx: 215, cy: 175, d: poligonoMunicipio(215, 175, 28, 22, -2) },
-  Floresta: { cx: 258, cy: 255, d: poligonoMunicipio(258, 255, 32, 24, 3) },
+  Araripina: { cx: 78, cy: 118, d: poligonoMunicipio(78, 118, 26, 20, 3) },
+  Ouricuri: { cx: 132, cy: 152, d: poligonoMunicipio(132, 152, 26, 20, -2) },
+  Petrolina: { cx: 112, cy: 318, d: poligonoMunicipio(112, 318, 34, 26, 4) },
+  Salgueiro: { cx: 218, cy: 162, d: poligonoMunicipio(218, 162, 26, 20, -2) },
+  Floresta: { cx: 278, cy: 252, d: poligonoMunicipio(278, 252, 28, 22, 3) },
   'Serra Talhada': {
-    cx: 300,
-    cy: 152,
-    d: poligonoMunicipio(300, 152, 27, 21, -3),
+    cx: 302,
+    cy: 146,
+    d: poligonoMunicipio(302, 146, 25, 19, -2),
   },
   'Afogados da Ingazeira': {
-    cx: 362,
-    cy: 126,
-    d: poligonoMunicipio(362, 126, 24, 18, 2),
+    cx: 356,
+    cy: 108,
+    d: poligonoMunicipio(356, 108, 22, 17, 2),
   },
-  Custódia: { cx: 352, cy: 196, d: poligonoMunicipio(352, 196, 24, 20, -2) },
-  Arcoverde: { cx: 404, cy: 212, d: poligonoMunicipio(404, 212, 21, 18, 2) },
+  Custódia: { cx: 368, cy: 184, d: poligonoMunicipio(368, 184, 22, 18, -2) },
+  Arcoverde: { cx: 416, cy: 202, d: poligonoMunicipio(416, 202, 20, 17, 2) },
 
   // Agreste
-  Pesqueira: { cx: 446, cy: 194, d: poligonoMunicipio(446, 194, 20, 18, -2) },
+  Pesqueira: { cx: 458, cy: 192, d: poligonoMunicipio(458, 192, 19, 16, -2) },
   'Belo Jardim': {
-    cx: 486,
-    cy: 216,
-    d: poligonoMunicipio(486, 216, 20, 18, 2),
+    cx: 496,
+    cy: 202,
+    d: poligonoMunicipio(496, 202, 18, 15, 2),
   },
   'São Bento do Una': {
-    cx: 462,
-    cy: 262,
-    d: poligonoMunicipio(462, 262, 21, 18, -1),
+    cx: 496,
+    cy: 242,
+    d: poligonoMunicipio(496, 242, 19, 16, -1),
   },
   'Bom Conselho': {
-    cx: 422,
-    cy: 302,
-    d: poligonoMunicipio(422, 302, 21, 18, 2),
+    cx: 446,
+    cy: 288,
+    d: poligonoMunicipio(446, 288, 20, 17, 2),
   },
-  Garanhuns: { cx: 472, cy: 308, d: poligonoMunicipio(472, 308, 22, 18, -2) },
-  Altinho: { cx: 518, cy: 258, d: poligonoMunicipio(518, 258, 19, 17, 1) },
+  Garanhuns: { cx: 494, cy: 288, d: poligonoMunicipio(494, 288, 21, 17, -2) },
+  Altinho: { cx: 538, cy: 240, d: poligonoMunicipio(538, 240, 18, 15, 1) },
   'Santa Cruz do Capibaribe': {
-    cx: 508,
+    cx: 518,
     cy: 146,
-    d: poligonoMunicipio(508, 146, 19, 16, 2),
+    d: poligonoMunicipio(518, 146, 18, 15, 2),
   },
-  Toritama: { cx: 546, cy: 156, d: poligonoMunicipio(546, 156, 16, 14, -2) },
-  Caruaru: { cx: 544, cy: 204, d: poligonoMunicipio(544, 204, 22, 18, 2) },
-  Surubim: { cx: 582, cy: 142, d: poligonoMunicipio(582, 142, 18, 15, -1) },
-  Bezerros: { cx: 586, cy: 216, d: poligonoMunicipio(586, 216, 17, 15, 1) },
-  Limoeiro: { cx: 620, cy: 162, d: poligonoMunicipio(620, 162, 17, 15, -2) },
-  Gravatá: { cx: 620, cy: 222, d: poligonoMunicipio(620, 222, 17, 15, 2) },
+  Toritama: { cx: 554, cy: 154, d: poligonoMunicipio(554, 154, 15, 13, -2) },
+  Caruaru: { cx: 556, cy: 198, d: poligonoMunicipio(556, 198, 21, 17, 2) },
+  Surubim: { cx: 588, cy: 136, d: poligonoMunicipio(588, 136, 17, 14, -1) },
+  Bezerros: { cx: 592, cy: 202, d: poligonoMunicipio(592, 202, 16, 14, 1) },
+  Limoeiro: { cx: 626, cy: 152, d: poligonoMunicipio(626, 152, 16, 14, -2) },
+  Gravatá: { cx: 624, cy: 206, d: poligonoMunicipio(624, 206, 16, 14, 2) },
 
   // Zona da Mata e Região Metropolitana do Recife
-  Palmares: { cx: 582, cy: 294, d: poligonoMunicipio(582, 294, 21, 17, -2) },
-  Escada: { cx: 642, cy: 272, d: poligonoMunicipio(642, 272, 18, 15, 2) },
+  Palmares: { cx: 608, cy: 266, d: poligonoMunicipio(608, 266, 20, 16, -2) },
+  Escada: { cx: 668, cy: 244, d: poligonoMunicipio(668, 244, 17, 14, 2) },
   'Vitória de Santo Antão': {
-    cx: 656,
-    cy: 224,
-    d: poligonoMunicipio(656, 224, 17, 15, -1),
+    cx: 662,
+    cy: 204,
+    d: poligonoMunicipio(662, 204, 16, 14, -1),
   },
-  Timbaúba: { cx: 652, cy: 96, d: poligonoMunicipio(652, 96, 17, 14, 2) },
+  Timbaúba: { cx: 668, cy: 96, d: poligonoMunicipio(668, 96, 16, 13, 2) },
   'Nazaré da Mata': {
-    cx: 666,
-    cy: 130,
-    d: poligonoMunicipio(666, 130, 16, 14, -1),
-  },
-  Carpina: { cx: 660, cy: 166, d: poligonoMunicipio(660, 166, 16, 14, 1) },
-  Goiana: { cx: 716, cy: 100, d: poligonoMunicipio(716, 100, 19, 15, -2) },
-  Igarassu: { cx: 726, cy: 142, d: poligonoMunicipio(726, 142, 16, 13, 1) },
-  'Abreu e Lima': {
-    cx: 718,
-    cy: 174,
-    d: poligonoMunicipio(718, 174, 14, 12, -1),
-  },
-  Paulista: { cx: 748, cy: 174, d: poligonoMunicipio(748, 174, 14, 12, 1) },
-  Camaragibe: { cx: 696, cy: 196, d: poligonoMunicipio(696, 196, 13, 11, -1) },
-  'São Lourenço da Mata': {
     cx: 678,
-    cy: 206,
-    d: poligonoMunicipio(678, 206, 14, 12, 1),
+    cy: 126,
+    d: poligonoMunicipio(678, 126, 15, 13, -1),
   },
-  Olinda: { cx: 752, cy: 202, d: poligonoMunicipio(752, 202, 13, 11, -1) },
-  Recife: { cx: 744, cy: 230, d: poligonoMunicipio(744, 230, 16, 14, 1) },
+  Carpina: { cx: 672, cy: 156, d: poligonoMunicipio(672, 156, 15, 13, 1) },
+  Goiana: { cx: 728, cy: 96, d: poligonoMunicipio(728, 96, 18, 14, -2) },
+  Igarassu: { cx: 734, cy: 132, d: poligonoMunicipio(734, 132, 15, 12, 1) },
+  'Abreu e Lima': {
+    cx: 726,
+    cy: 154,
+    d: poligonoMunicipio(726, 154, 13, 10, -1),
+  },
+  Paulista: { cx: 748, cy: 158, d: poligonoMunicipio(748, 158, 13, 10, 1) },
+  Camaragibe: { cx: 714, cy: 182, d: poligonoMunicipio(714, 182, 12, 10, -1) },
+  'São Lourenço da Mata': {
+    cx: 694,
+    cy: 194,
+    d: poligonoMunicipio(694, 194, 14, 11, 1),
+  },
+  Olinda: { cx: 754, cy: 176, d: poligonoMunicipio(754, 176, 12, 10, -1) },
+  Recife: { cx: 746, cy: 196, d: poligonoMunicipio(746, 196, 15, 12, 1) },
   'Jaboatão dos Guararapes': {
-    cx: 714,
-    cy: 252,
-    d: poligonoMunicipio(714, 252, 17, 14, -1),
+    cx: 730,
+    cy: 218,
+    d: poligonoMunicipio(730, 218, 16, 12, -1),
   },
   'Cabo de Santo Agostinho': {
-    cx: 702,
-    cy: 286,
-    d: poligonoMunicipio(702, 286, 17, 14, 1),
+    cx: 718,
+    cy: 242,
+    d: poligonoMunicipio(718, 242, 16, 13, 1),
   },
-  Ipojuca: { cx: 702, cy: 320, d: poligonoMunicipio(702, 320, 17, 14, -1) },
+  Ipojuca: { cx: 706, cy: 268, d: poligonoMunicipio(706, 268, 16, 13, -1) },
 };
 
 interface EstiloMapaNivel {
@@ -155,9 +155,9 @@ const ESTILO_POR_NIVEL: Record<NivelAlerta, EstiloMapaNivel> = {
   'sem-alerta': { fill: '#E2E8F0', stroke: '#94A3B8' },
 };
 
-/** Contorno macro esquemático do Estado de Pernambuco dentro de 800x400. */
+/** Contorno geográfico estilizado do Estado de Pernambuco dentro de 800x400. */
 const CONTORNO_PERNAMBUCO =
-  'M 48 112 L 105 78 L 235 104 L 315 92 L 420 96 L 520 108 L 620 68 L 745 72 L 774 176 L 764 252 L 728 344 L 635 338 L 545 332 L 440 342 L 350 296 L 230 298 L 125 304 L 62 260 L 42 182 Z';
+  'M 36 108 L 68 82 L 124 92 L 172 118 L 234 114 L 286 96 L 344 74 L 396 82 L 414 148 L 468 154 L 504 116 L 566 108 L 622 92 L 666 68 L 750 70 L 764 118 L 772 168 L 766 206 L 748 248 L 728 292 L 668 286 L 604 298 L 546 286 L 496 324 L 432 326 L 396 276 L 344 286 L 278 302 L 218 292 L 168 338 L 106 368 L 64 334 L 48 258 L 28 176 Z';
 
 export function MapaPE({
   dados,
@@ -185,7 +185,7 @@ export function MapaPE({
         aria-label="Mapa coroplético de conflitos por município em Pernambuco"
         className="w-full h-auto rounded-card bg-slate-50 border border-border-subtle"
       >
-        {/* Fundo macrorregional estilizado de Pernambuco */}
+        {/* Fundo geográfico de Pernambuco */}
         <path
           d={CONTORNO_PERNAMBUCO}
           fill="#F1F5F9"
@@ -195,9 +195,9 @@ export function MapaPE({
 
         {/* Divisores sutis de mesorregiões para leitura geográfica */}
         <g stroke="#CBD5E1" strokeDasharray="4 4" strokeWidth={1} opacity={0.7}>
-          <line x1="382" y1="95" x2="365" y2="302" />
-          <line x1="600" y1="74" x2="560" y2="332" />
-          <line x1="680" y1="72" x2="665" y2="340" />
+          <line x1="414" y1="148" x2="396" y2="276" />
+          <line x1="622" y1="92" x2="585" y2="292" />
+          <line x1="704" y1="70" x2="686" y2="288" />
         </g>
 
         <g
@@ -206,16 +206,16 @@ export function MapaPE({
           fontWeight="600"
           letterSpacing="0.06em"
         >
-          <text x="175" y="54" textAnchor="middle">
+          <text x="205" y="52" textAnchor="middle">
             SERTÃO
           </text>
-          <text x="488" y="54" textAnchor="middle">
+          <text x="515" y="52" textAnchor="middle">
             AGRESTE
           </text>
-          <text x="635" y="54" textAnchor="middle">
+          <text x="656" y="52" textAnchor="middle">
             MATA
           </text>
-          <text x="735" y="54" textAnchor="middle">
+          <text x="742" y="52" textAnchor="middle">
             RMR
           </text>
         </g>
