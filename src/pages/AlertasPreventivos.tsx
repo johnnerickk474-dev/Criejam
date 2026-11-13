@@ -161,7 +161,7 @@ export function AlertasPreventivos() {
               htmlFor="filtro-parte-re"
               className="block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1.5"
             >
-              Parte Ré
+              Ré/Réu
             </label>
             <select
               id="filtro-parte-re"
@@ -262,7 +262,7 @@ export function AlertasPreventivos() {
                     Objeto da Ação
                   </th>
                   <th scope="col" className="px-5 py-3">
-                    Parte Ré
+                    Ré/Réu
                   </th>
                   <th scope="col" className="px-5 py-3">
                     Município
@@ -270,7 +270,7 @@ export function AlertasPreventivos() {
                   <th scope="col" className="px-5 py-3">
                     Variação %
                   </th>
-                  <th scope="col" className="px-5 py-3 text-right">
+                  <th scope="col" className="px-5 py-3 text-center">
                     Ação
                   </th>
                 </tr>
@@ -312,7 +312,7 @@ export function AlertasPreventivos() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-right whitespace-nowrap">
+                    <td className="px-5 py-4 text-center whitespace-nowrap">
                       <Link
                         to={`/laboratorio/${alerta.id}`}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-accent text-white text-xs font-semibold hover:bg-accent-hover transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
