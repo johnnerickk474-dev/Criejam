@@ -7,20 +7,12 @@ import {
   Handshake,
   MapPin,
   Sparkles,
+  TrendingUp,
 } from 'lucide-react';
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
 import { BadgeNivel } from '../components/BadgeNivel';
 import { PageHeader } from '../components/PageHeader';
 import type { AlertaCalculado } from '../data/tipos';
-import { formatarVariacao, rotuloMes } from '../lib/variacao';
+import { formatarVariacao } from '../lib/variacao';
 import { getAlerta } from '../services/dataService';
 
 export function LaboratorioCausas() {
@@ -123,11 +115,6 @@ export function LaboratorioCausas() {
     );
   }
 
-  const dadosSerie = alerta.serieMensal.map((casos, indice) => ({
-    mes: rotuloMes(indice),
-    casos,
-  }));
-
   return (
     <section aria-labelledby="titulo-pagina" className="space-y-6">
       <div>
@@ -146,89 +133,72 @@ export function LaboratorioCausas() {
         />
       </div>
 
-      {/* Seção 1: A Evidência (Leitura do Indicador) */}
-      <article className="card-base p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      {/* Seção 1: A Evidência (Padrão NUPEMEC) */}
+      <article className="card-base p-6 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
-              Seção 1 · A Evidência
-            </p>
-            <h2 className="text-lg font-bold text-navy mt-0.5">
-              Leitura do Indicador ({alerta.categoria})
+            <h2 className="text-lg font-bold text-navy">
+              Alerta de crescimento de demandas
             </h2>
+            <p className="text-sm text-text-secondary mt-0.5">
+              Monitoramento de litigiosidade repetitiva
+            </p>
           </div>
           <BadgeNivel nivel={alerta.nivel} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-          <div className="space-y-2 bg-surface-page border border-border-subtle rounded-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
-              Variação no período (out/2026 vs. set/2026)
-            </p>
-            <p className="text-2xl font-bold text-navy tabular-nums">
-              {formatarVariacao(alerta)}
-            </p>
-            <p className="text-sm text-text-secondary tabular-nums">
-              De{' '}
-              <strong className="text-text-primary">
-                {alerta.periodoAnterior.toLocaleString('pt-BR')}
-              </strong>{' '}
-              para{' '}
-              <strong className="text-text-primary">
-                {alerta.periodoAtual.toLocaleString('pt-BR')}
-              </strong>{' '}
-              casos no mês.
-            </p>
-            <p className="text-xs text-text-secondary">
-              Situação atual: <span className="font-medium">{alerta.situacao}</span>
+        {/* Primeira Linha de Dados */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <p className="text-xs font-medium text-text-secondary">Parte ré</p>
+            <p className="text-lg font-bold text-navy mt-1">
+              {alerta.parteRe}
             </p>
           </div>
-
-          <div className="lg:col-span-2 h-64 min-h-[16rem] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={dadosSerie}
-                margin={{ top: 8, right: 12, left: 0, bottom: 4 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                <XAxis
-                  dataKey="mes"
-                  tick={{ fill: '#475569', fontSize: 11 }}
-                  tickLine={false}
-                  interval="preserveStartEnd"
-                />
-                <YAxis
-                  tick={{ fill: '#475569', fontSize: 11 }}
-                  tickLine={false}
-                  width={36}
-                />
-                <Tooltip
-                  formatter={(valor) => [
-                    typeof valor === 'number'
-                      ? valor.toLocaleString('pt-BR')
-                      : String(valor ?? ''),
-                    'Casos',
-                  ]}
-                  contentStyle={{
-                    backgroundColor: '#FFFFFF',
-                    borderColor: '#E2E8F0',
-                    borderRadius: '0.5rem',
-                    fontSize: '0.75rem',
-                  }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="casos"
-                  name="Casos"
-                  stroke="#0F766E"
-                  strokeWidth={2.5}
-                  dot={{ r: 2.5, fill: '#142D4E' }}
-                  activeDot={{ r: 5, fill: '#142D4E' }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+          <div>
+            <p className="text-xs font-medium text-text-secondary">Assunto</p>
+            <p className="text-lg font-bold text-navy mt-1">
+              {alerta.categoria}
+            </p>
           </div>
         </div>
+
+        {/* Segunda Linha de Dados */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-border-subtle">
+          <div>
+            <p className="text-xs font-medium text-text-secondary">
+              Período anterior
+            </p>
+            <p className="text-3xl font-bold text-navy tabular-nums mt-1">
+              {alerta.periodoAnterior.toLocaleString('pt-BR')}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs font-medium text-text-secondary">
+              Período atual
+            </p>
+            <p className="text-3xl font-bold text-navy tabular-nums mt-1">
+              {alerta.periodoAtual.toLocaleString('pt-BR')}
+            </p>
+          </div>
+        </div>
+
+        {/* Indicador de Crescimento */}
+        <div className="inline-flex items-center gap-2 text-base font-bold text-alerta-prioritario-text">
+          <TrendingUp className="w-5 h-5 shrink-0" aria-hidden="true" />
+          <span className="tabular-nums">
+            {alerta.nivel === 'sem-base'
+              ? formatarVariacao(alerta)
+              : `Crescimento de ${formatarVariacao(alerta)}`}
+          </span>
+        </div>
+
+        {/* Rodapé de Contexto (Texto Institucional) */}
+        <p className="bg-gray-50 border border-border-subtle rounded-card p-4 text-sm text-text-secondary leading-relaxed">
+          O Radar identificou um aumento relevante de processos relacionados à
+          mesma parte ré e ao mesmo assunto. A informação poderá subsidiar a
+          avaliação de medidas preventivas pelo NUPEMEC.
+        </p>
       </article>
 
       {/* Seção 2: Investigação (As Hipóteses / 5 Porquês) */}
