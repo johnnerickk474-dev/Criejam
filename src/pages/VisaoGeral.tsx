@@ -71,7 +71,6 @@ export function VisaoGeral() {
       <PageHeader
         rotulo="OBSERVAR E DETECTAR"
         titulo="Visão Geral"
-        subtitulo="Síntese executiva dos sinais de crescimento de demandas por assunto, parte ré e município em Pernambuco (out/2026 vs. set/2026)."
       />
 
       {carregando || !dashboard ? (

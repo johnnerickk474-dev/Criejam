@@ -1,7 +1,7 @@
 export interface PageHeaderProps {
   rotulo: string;
   titulo: string;
-  subtitulo: string;
+  subtitulo?: string;
 }
 
 export function PageHeader({ rotulo, titulo, subtitulo }: PageHeaderProps) {
@@ -16,9 +16,11 @@ export function PageHeader({ rotulo, titulo, subtitulo }: PageHeaderProps) {
       >
         {titulo}
       </h1>
-      <p className="text-sm sm:text-base text-text-secondary mt-2 max-w-3xl">
-        {subtitulo}
-      </p>
+      {subtitulo && (
+        <p className="text-sm sm:text-base text-text-secondary mt-2 max-w-3xl">
+          {subtitulo}
+        </p>
+      )}
     </div>
   );
 }
