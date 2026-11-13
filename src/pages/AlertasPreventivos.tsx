@@ -252,7 +252,7 @@ export function AlertasPreventivos() {
               </caption>
               <thead>
                 <tr className="bg-surface-subtle border-b border-border-subtle text-xs font-semibold uppercase tracking-wider text-text-secondary">
-                  <th scope="col" className="px-5 py-3">
+                  <th scope="col" className="px-5 py-3 text-center">
                     ID
                   </th>
                   <th scope="col" className="px-5 py-3">
@@ -281,7 +281,7 @@ export function AlertasPreventivos() {
                     key={alerta.id}
                     className="hover:bg-surface-page/70 transition-colors"
                   >
-                    <td className="px-5 py-4 font-mono text-xs font-semibold text-navy whitespace-nowrap">
+                    <td className="px-5 py-4 text-center font-mono text-xs font-semibold text-navy whitespace-nowrap">
                       {alerta.id}
                     </td>
                     <td className="px-5 py-4 text-text-secondary whitespace-nowrap">
