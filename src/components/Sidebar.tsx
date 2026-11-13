@@ -103,20 +103,20 @@ export function Sidebar({ aberto, aoFechar }: SidebarProps) {
           aberto ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 pt-6 border-b border-white/10">
+          <div className="flex items-center gap-3 px-2 mb-6">
             <img
               src="/logo.jpeg"
               alt="Logo Radar de Conflitos"
-              className="w-10 h-10 rounded-full object-cover shadow-sm"
+              className="w-12 h-12 rounded-full object-cover shadow-md shrink-0"
             />
-            <div>
-              <div className="text-xl font-extrabold tracking-wider leading-none text-white">
+            <div className="flex flex-col justify-center">
+              <span className="text-2xl font-bold tracking-widest text-white leading-none">
                 RADAR
-              </div>
-              <div className="text-xs font-semibold tracking-widest text-accent-onDark mt-1">
+              </span>
+              <span className="text-sm font-semibold tracking-widest text-teal-400 leading-tight mt-1">
                 CONFLITOS
-              </div>
+              </span>
             </div>
           </div>
 
@@ -124,7 +124,7 @@ export function Sidebar({ aberto, aoFechar }: SidebarProps) {
             type="button"
             onClick={aoFechar}
             aria-label="Fechar menu de navegação"
-            className="lg:hidden p-1.5 rounded-md text-slate-200 hover:bg-navy-light hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-onDark"
+            className="lg:hidden mb-6 p-1.5 rounded-md text-slate-200 hover:bg-navy-light hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-onDark"
           >
             <X className="w-5 h-5" aria-hidden="true" />
           </button>
