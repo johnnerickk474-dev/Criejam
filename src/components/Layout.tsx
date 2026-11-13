@@ -35,7 +35,7 @@ export function Layout() {
               <span>Menu</span>
             </button>
             <span className="text-sm font-bold tracking-wider">
-              RADAR CONFLITOS PE
+              RADAR CONFLITOS
             </span>
           </div>
         </header>
@@ -50,7 +50,7 @@ export function Layout() {
 
         <footer className="relative z-10 border-t border-border-subtle bg-surface-card px-6 py-4 text-xs text-text-secondary">
           <div className="max-w-7xl mx-auto">
-            RADAR DE CONFLITOS PE · Inteligência para agir antes do processo.
+            RADAR DE CONFLITOS · Inteligência para agir antes do processo.
             Protótipo demonstrativo com dados sintéticos para a CRIEJAM 2026.
             Nenhum número desta interface representa a realidade de Pernambuco.
           </div>

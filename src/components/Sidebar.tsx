@@ -104,12 +104,19 @@ export function Sidebar({ aberto, aoFechar }: SidebarProps) {
         }`}
       >
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-          <div>
-            <div className="text-xl font-extrabold tracking-wider leading-none text-white">
-              RADAR
-            </div>
-            <div className="text-xs font-semibold tracking-widest text-accent-onDark mt-1">
-              CONFLITOS PE
+          <div className="flex items-center gap-3">
+            <img
+              src="/logo.jpeg"
+              alt="Logo Radar de Conflitos"
+              className="w-10 h-10 rounded-full object-cover shadow-sm"
+            />
+            <div>
+              <div className="text-xl font-extrabold tracking-wider leading-none text-white">
+                RADAR
+              </div>
+              <div className="text-xs font-semibold tracking-widest text-accent-onDark mt-1">
+                CONFLITOS
+              </div>
             </div>
           </div>
 
