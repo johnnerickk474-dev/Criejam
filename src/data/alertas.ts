@@ -15,6 +15,15 @@ export const DEFINICOES_ALERTAS: DefinicaoAlerta[] = [
     focoId: 'F-001',
     situacao: 'Hipótese registrada',
     geradoEm: '2026-11-05',
+    hipoteses: [
+      {
+        texto:
+          "Identificado aumento repentino de registros de 'Cobrança Indevida' no Procon e no consumidor.gov.br nas últimas 3 semanas, com possível reflexo imediato na judicialização na comarca de Recife. Possível falha sistêmica no faturamento do mês de outubro.",
+        geradaPorIA: true,
+      },
+    ],
+    oportunidade:
+      'Contato institucional prévio com a TeleRecife Telecom para averiguar a anomalia sistêmica e propor um mutirão temático de conciliação pré-processual no CEJUSC Recife.',
   },
   {
     id: 'AL-2026-002',
