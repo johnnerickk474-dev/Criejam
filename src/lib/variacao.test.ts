@@ -95,12 +95,12 @@ describe('calcularVariacao', () => {
 });
 
 describe('funções auxiliares de variação e mês', () => {
-  it('gera rótulos de mês corretos de set/2025 a out/2026', () => {
-    expect(rotuloMes(0)).toBe('set/2025');
-    expect(rotuloMes(3)).toBe('dez/2025');
-    expect(rotuloMes(4)).toBe('jan/2026');
-    expect(rotuloMes(12)).toBe('set/2026');
-    expect(rotuloMes(13)).toBe('out/2026');
+  it('gera rótulos de mês corretos de out/2025 a nov/2026', () => {
+    expect(rotuloMes(0)).toBe('out/2025');
+    expect(rotuloMes(3)).toBe('jan/2026');
+    expect(rotuloMes(4)).toBe('fev/2026');
+    expect(rotuloMes(12)).toBe('out/2026');
+    expect(rotuloMes(13)).toBe('nov/2026');
   });
 
   it('formata variação em pt-BR com sinal tipográfico e texto sem-base', () => {
@@ -169,8 +169,8 @@ describe('dados fictícios e dataService', () => {
     const dashboard = await getDashboard();
     expect(dashboard.alertasAtivos).toBe(6);
     expect(dashboard.evolucaoMensal).toHaveLength(14);
-    expect(dashboard.evolucaoMensal[0].mes).toBe('set/2025');
-    expect(dashboard.evolucaoMensal[13].mes).toBe('out/2026');
+    expect(dashboard.evolucaoMensal[0].mes).toBe('out/2025');
+    expect(dashboard.evolucaoMensal[13].mes).toBe('nov/2026');
 
     const litigantes = await getLitigantes();
     expect(litigantes.length).toBeGreaterThan(0);

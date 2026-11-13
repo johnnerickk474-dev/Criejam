@@ -86,13 +86,13 @@ export function VisaoGeral() {
             <KpiCard
               rotulo="Novos casos no período"
               valor={dashboard.totalCasosPeriodoAtual.toLocaleString('pt-BR')}
-              detalhe={`Período anterior (set/2026): ${dashboard.totalCasosPeriodoAnterior.toLocaleString('pt-BR')}`}
+              detalhe={`Período anterior (out/2026): ${dashboard.totalCasosPeriodoAnterior.toLocaleString('pt-BR')}`}
               icone={Activity}
             />
             <KpiCard
               rotulo="Variação %"
               valor={formatarVariacao(dashboard.variacaoGeral)}
-              detalhe="Comparativo global de out/2026 sobre set/2026"
+              detalhe="Comparativo global de nov/2026 sobre out/2026"
               icone={TrendingUp}
             />
             <KpiCard
@@ -114,8 +114,8 @@ export function VisaoGeral() {
               <div className="mb-4">
                 <h2 className="text-lg font-bold text-navy">Evolução Mensal</h2>
                 <p className="text-xs text-text-secondary mt-1">
-                  Volume mensal consolidado dos focos monitorados (set/2025 a
-                  out/2026)
+                  Volume mensal consolidado dos focos monitorados (out/2025 a
+                  nov/2026)
                 </p>
               </div>
               <div className="h-72 min-h-[16rem] w-full">
@@ -170,7 +170,7 @@ export function VisaoGeral() {
                   Distribuição por Assunto Jurídico
                 </h2>
                 <p className="text-xs text-text-secondary mt-1">
-                  Casos registrados no período atual (out/2026) por assunto
+                  Casos registrados no período atual (nov/2026) por assunto
                   jurídico
                 </p>
               </div>
@@ -231,7 +231,7 @@ export function VisaoGeral() {
               </h2>
               <p className="text-xs text-text-secondary mt-1">
                 Assuntos jurídicos classificados em nível Atenção ou Prioritário
-                em out/2026
+                em nov/2026
               </p>
             </div>
 
@@ -302,7 +302,7 @@ export function VisaoGeral() {
               </h2>
               <p className="text-xs text-text-secondary mt-1">
                 Partes rés (empresas fictícias) classificadas em nível Atenção
-                ou Prioritário em out/2026
+                ou Prioritário em nov/2026
               </p>
             </div>
 

@@ -28,7 +28,7 @@ export interface Foco {
   parteRe: string;
   setorParteRe: string;
   municipio: string;
-  /** Série mensal com 14 pontos: de set/2025 (índice 0) a out/2026 (índice 13). */
+  /** Série mensal com 14 pontos: de out/2025 (índice 0) a nov/2026 (índice 13). */
   serieMensal: number[];
 }
 

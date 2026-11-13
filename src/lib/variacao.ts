@@ -60,10 +60,10 @@ export function calcularVariacao(
 }
 
 /**
- * Retorna o rótulo do mês no formato "mmm/AAAA" a partir do índice 0 = "set/2025".
+ * Retorna o rótulo do mês no formato "mmm/AAAA" a partir do índice 0 = "out/2025".
  */
 export function rotuloMes(indice: number): string {
-  const mesBase = 8; // setembro (0-based)
+  const mesBase = 9; // outubro (0-based)
   const anoBase = 2025;
   const totalMeses = mesBase + indice;
   const ano = anoBase + Math.floor(totalMeses / 12);

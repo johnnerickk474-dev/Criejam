@@ -121,7 +121,7 @@ export function MapaPE({
 
                   <dl className="mt-2 space-y-1 text-text-secondary">
                     <div className="flex justify-between gap-3">
-                      <dt>Casos atuais (out/2026):</dt>
+                      <dt>Casos atuais (nov/2026):</dt>
                       <dd className="font-semibold text-text-primary tabular-nums">
                         {item.casosAtual.toLocaleString('pt-BR')}
                       </dd>
