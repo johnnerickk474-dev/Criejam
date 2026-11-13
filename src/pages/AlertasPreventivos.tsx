@@ -25,28 +25,39 @@ const ASSUNTOS_JURIDICOS: readonly CategoriaAssunto[] = [
 export function AlertasPreventivos() {
   const [alertas, setAlertas] = useState<AlertaCalculado[]>([]);
   const [municipios, setMunicipios] = useState<Municipio[]>([]);
+  const [partesRes, setPartesRes] = useState<string[]>([]);
   const [nivelSelecionado, setNivelSelecionado] = useState<NivelAlerta | ''>(
     '',
   );
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<
     CategoriaAssunto | ''
   >('');
+  const [parteReSelecionada, setParteReSelecionada] = useState<string>('');
   const [municipioSelecionado, setMunicipioSelecionado] = useState<string>('');
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     let ativo = true;
 
-    async function carregarMunicipios() {
-      const lista = await getMunicipios();
+    async function carregarOpcoesFiltros() {
+      const [listaMunicipios, listaAlertas] = await Promise.all([
+        getMunicipios(),
+        getAlertas(),
+      ]);
       if (!ativo) return;
-      const ordenada = [...lista].sort((a, b) =>
+
+      const municipiosOrdenados = [...listaMunicipios].sort((a, b) =>
         a.nome.localeCompare(b.nome, 'pt-BR'),
       );
-      setMunicipios(ordenada);
+      const partesResUnicas = Array.from(
+        new Set(listaAlertas.map((alerta) => alerta.parteRe)),
+      ).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+      setMunicipios(municipiosOrdenados);
+      setPartesRes(partesResUnicas);
     }
 
-    void carregarMunicipios();
+    void carregarOpcoesFiltros();
 
     return () => {
       ativo = false;
@@ -61,6 +72,7 @@ export function AlertasPreventivos() {
       const resultado = await getAlertas({
         nivel: nivelSelecionado || undefined,
         categoria: categoriaSelecionada || undefined,
+        parteRe: parteReSelecionada || undefined,
         municipio: municipioSelecionado || undefined,
       });
 
@@ -74,7 +86,12 @@ export function AlertasPreventivos() {
     return () => {
       ativo = false;
     };
-  }, [nivelSelecionado, categoriaSelecionada, municipioSelecionado]);
+  }, [
+    nivelSelecionado,
+    categoriaSelecionada,
+    parteReSelecionada,
+    municipioSelecionado,
+  ]);
 
   return (
     <section aria-labelledby="titulo-pagina" className="space-y-6">
@@ -84,7 +101,7 @@ export function AlertasPreventivos() {
         subtitulo="Monitoramento de variações relevantes de processos por assunto, parte ré e município para atuação preventiva de NUPEMEC e CEJUSCs."
       />
 
-      <div className="card-base p-5">
+      <div className="card-base p-5 space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
           <div>
             <label
@@ -141,6 +158,28 @@ export function AlertasPreventivos() {
 
           <div>
             <label
+              htmlFor="filtro-parte-re"
+              className="block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1.5"
+            >
+              Parte Ré
+            </label>
+            <select
+              id="filtro-parte-re"
+              value={parteReSelecionada}
+              onChange={(evento) => setParteReSelecionada(evento.target.value)}
+              className="w-full rounded-md border border-border-subtle bg-surface-card px-3 py-2 text-sm text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <option value="">Todas as partes rés</option>
+              {partesRes.map((parteRe) => (
+                <option key={parteRe} value={parteRe}>
+                  {parteRe}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label
               htmlFor="filtro-municipio"
               className="block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1.5"
             >
@@ -163,33 +202,35 @@ export function AlertasPreventivos() {
               ))}
             </select>
           </div>
+        </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3">
-            <p className="text-xs text-text-secondary">
-              {carregando
-                ? 'Atualizando lista...'
-                : `${alertas.length} ${
-                    alertas.length === 1
-                      ? 'alerta encontrado'
-                      : 'alertas encontrados'
-                  }`}
-            </p>
-            {(nivelSelecionado ||
-              categoriaSelecionada ||
-              municipioSelecionado) && (
-              <button
-                type="button"
-                onClick={() => {
-                  setNivelSelecionado('');
-                  setCategoriaSelecionada('');
-                  setMunicipioSelecionado('');
-                }}
-                className="text-xs font-semibold text-accent hover:text-accent-hover underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
-              >
-                Limpar filtros
-              </button>
-            )}
-          </div>
+        <div className="flex items-center justify-between gap-3 pt-1">
+          <p className="text-xs text-text-secondary">
+            {carregando
+              ? 'Atualizando lista...'
+              : `${alertas.length} ${
+                  alertas.length === 1
+                    ? 'alerta encontrado'
+                    : 'alertas encontrados'
+                }`}
+          </p>
+          {(nivelSelecionado ||
+            categoriaSelecionada ||
+            parteReSelecionada ||
+            municipioSelecionado) && (
+            <button
+              type="button"
+              onClick={() => {
+                setNivelSelecionado('');
+                setCategoriaSelecionada('');
+                setParteReSelecionada('');
+                setMunicipioSelecionado('');
+              }}
+              className="text-xs font-semibold text-accent hover:text-accent-hover underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+            >
+              Limpar filtros
+            </button>
+          )}
         </div>
       </div>
 
@@ -215,7 +256,10 @@ export function AlertasPreventivos() {
                     ID
                   </th>
                   <th scope="col" className="px-5 py-3">
-                    Tema
+                    Objeto da Ação
+                  </th>
+                  <th scope="col" className="px-5 py-3">
+                    Assunto Jurídico
                   </th>
                   <th scope="col" className="px-5 py-3">
                     Parte Ré
@@ -240,13 +284,11 @@ export function AlertasPreventivos() {
                     <td className="px-5 py-4 font-mono text-xs font-semibold text-navy whitespace-nowrap">
                       {alerta.id}
                     </td>
-                    <td className="px-5 py-4">
-                      <div className="font-semibold text-text-primary">
-                        {alerta.assunto}
-                      </div>
-                      <div className="text-xs text-text-secondary mt-0.5">
-                        {alerta.categoria}
-                      </div>
+                    <td className="px-5 py-4 font-semibold text-text-primary">
+                      {alerta.assunto}
+                    </td>
+                    <td className="px-5 py-4 text-text-secondary whitespace-nowrap">
+                      {alerta.categoria}
                     </td>
                     <td className="px-5 py-4">
                       <div className="font-medium text-text-primary">

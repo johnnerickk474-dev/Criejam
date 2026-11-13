@@ -17,6 +17,7 @@ export interface FiltrosAlertas {
   nivel?: NivelAlerta;
   municipio?: string;
   categoria?: CategoriaAssunto;
+  parteRe?: string;
   situacao?: SituacaoAlerta;
 }
 
@@ -200,6 +201,12 @@ export async function getAlertas(
       return false;
     }
     if (filtros.categoria && alerta.categoria !== filtros.categoria) {
+      return false;
+    }
+    if (
+      filtros.parteRe &&
+      !alerta.parteRe.toLowerCase().includes(filtros.parteRe.toLowerCase())
+    ) {
       return false;
     }
     if (filtros.situacao && alerta.situacao !== filtros.situacao) {
